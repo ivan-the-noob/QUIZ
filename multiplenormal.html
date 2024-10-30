@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOBONG IVAN</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+
+
+    <style>
+        * {
+            margin: 0;
+
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            height: 150vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: start;
+            background: url('OIP.jpeg') center/cover no-repeat;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150vh;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -1;
+        }
+
+
+        h1 {
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #643cb4;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3c75d7;
+        }
+
+        #question-container {
+            width: 95%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: inherit;
+        }
+
+        .container {
+            width: 80%;
+        }
+
+        #background-container {
+            background-color: #ffff;
+            width: 95%;
+            height: 100%;
+            border-radius: 40px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        }
+
+        #answer-input {
+            margin-top: 10px;
+            padding: 10px;
+            width: 30%;
+            box-sizing: border-box;
+            background: none;
+            border-bottom: 2px solid #808080;
+            color: #000;
+            position: relative;
+            bottom: 100px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #answer-input:hover {
+            border-bottom: 4px solid rgb(103, 58, 183);
+            margin-top: 10px;
+            padding: 10px;
+            width: 30%;
+            box-sizing: border-box;
+            background: none;
+            color: #000;
+            position: relative;
+            bottom: 100px;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        #answer-input:focus {
+            outline: none;
+            border-color: transparent;
+            box-shadow: none;
+            border-bottom: 4px solid rgb(103, 58, 183);
+            ;
+        }
+
+
+
+        button,
+        #answer-input {
+            transition: background-color 0.3s ease;
+        }
+
+        label {
+            font-size: 18px;
+            display: block;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .correct {
+            color: #34a853;
+        }
+
+        .incorrect {
+            color: #ee1905;
+            width: 200px;
+            border-radius: 5px;
+            font-size: 30px;
+            margin-bottom: 5px;
+            height: 50px;
+            position: relative;
+            left: 75px;
+            font-weight: bold;
+        }
+
+        .incorrect .correct-answer {
+            position: absolute;
+            top: 100%;
+            width: 100%;
+            padding: 5px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            font-size: 14px;
+            color: #333;
+            display: none;
+        }
+
+        .correct-answer {
+            color: yellow;
+            font-weight: bold;
+        }
+
+        .incorrect:hover .correct-answer {
+            display: block;
+        }
+
+        #pick {
+            width: 50%;
+            height: 60%;
+            position: relative;
+            right: 30%;
+        }
+
+        #custom-question-form {
+            margin-top: 20px;
+        }
+
+        #custom-question,
+        #custom-answer {
+            margin-top: 10px;
+            padding: 10px;
+            width: 40%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #custom-question,
+        #custom-answer,
+        #custom-question-form button {
+            transition: background-color 0.3s ease;
+        }
+
+        #custom-question-form label {
+            font-size: 18px;
+            display: block;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        #custom-question-form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4285f4;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #custom-question-form button:hover {
+            background-color: #3c75d7;
+        }
+
+        #custom-question-form {
+            margin-top: 50px;
+        }
+
+        #custom-answer {
+            width: 20%;
+            margin-left: 150px;
+        }
+
+        #delete-all {
+            margin-top: 10px;
+        }
+
+        #question-text {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            position: relative;
+            top: 20px;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        .buttons {
+            position: relative;
+
+        }
+
+        .totalscore {
+            display: flex;
+            position: relative;
+            left: 30%;
+
+        }
+
+        .score {
+            background-color: #fff;
+            border-radius: 5px;
+            left: 100%;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            padding: 8px;
+            width: 80px;
+            height: 70px;
+            font-size: 20px;
+        }
+
+        .h2 {
+            width: 50px;
+            height: 50px;
+            background-color: white;
+        }
+
+        #answer-form label {
+            margin-right: 20px;
+            margin-left: 30px;
+            color: #000;
+            font-size: 15px;
+            word-wrap: break-word;
+            text-align: start;
+
+
+        }
+
+        #answer-form input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+
+        }
+
+        .bottom-button {
+            position: relative;
+
+        }
+
+        .correct-label {
+            color: #34a853;
+        }
+
+        #check-answer {
+            position: relative;
+            top: 10px;
+        }
+
+        a {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #643cb4;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+
+        }
+
+        .totalscore a {
+            width: 200%;
+            position: relative;
+            top: 20%;
+            padding: 15px;
+            right: 50px;
+        }
+
+        #reset-quiz {
+            position: relative;
+            left: 30%;
+            bottom: 20px;
+        }
+
+        .container-fluid {
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid rgb(218, 220, 224);
+            border-top: 15px solid rgb(103, 58, 183);
+            ;
+        }
+
+        .uploads {}
+
+        .button-link {
+            position: relative;
+            top: 50px;
+        }
+
+        .button-links {
+            position: relative;
+            top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>MAGREVIEW KA</h1>
+
+    <input type="file" id="uploadDocument" accept=".doc, .docx" style="display: none;">
+    <div class="uploads">
+        <div class="upload">
+            <button onclick="openFileExplorer()">Upload Reviewer</button>
+            <button onclick="analyzeDocumentSequential()">Import as normal</button>
+        </div>
+        <a href="randommultiplechoice.html" class="button-link">Import random</a>
+    </div>
+    <div class="totalscore">
+        <p class="score" id="score-display">SCORE: </p>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-20">
+                <div class="container-fluid rounded p-3">
+                    <div id="question-container" class="bg-light p-4" style="width: 100%;">
+                        <p id="question-text"></p>
+                    </div>
+                    <form id="answer-form">
+                        <label for="choice1">
+                            <input type="radio" name="answer" id="choice1" value="Choice 1" data-correct="false">
+                            Choice 1
+                        </label>
+                        <label for="choice2">
+                            <input type="radio" name="answer" id="choice2" value="Choice 2" data-correct="false">
+                            Choice 2
+                        </label>
+                        <label for="choice3">
+                            <input type="radio" name="answer" id="choice3" value="Choice 3" data-correct="false">
+                            Choice 3
+                        </label>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="buttons">
+
+        <button onclick="resetQuiz()" id="reset-quiz" style="display: none;">Reset Quiz</button>
+        <button onclick="checkAnswer()" id="check-answer">Check Answer</button>
+        <div class="bottom-button">
+            <div id="result"></div>
+            <button onclick="toggleCustomForm()" id="toggle-form">Add New Question</button>
+
+            <button onclick="deleteAllQuestions()" id="delete-all">Delete All Questions</button>
+        </div>
+
+
+    </div>
+    <a href="identification.html" class="button-links">IDENTIFICATION</a>
+
+
+    <form id="custom-question-form" hidden>
+        <label for="custom-question">New Question:</label>
+        <input type="text" id="custom-question" placeholder="Type your question here" required>
+
+        <label for="custom-answer">New Answer:</label>
+        <input type="text" id="custom-answer" placeholder="Type the answer here" required>
+
+        <button onclick="addCustomQuestion()">Add Custom Question</button>
+        <div id="custom-question-message" style="margin-top: 10px;"></div>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.0.2/mammoth.browser.min.js"></script>
+    <script>
+
+
+        function animateQuestions() {
+            var questionContainer = document.getElementById("question-container");
+            var resultDiv = document.getElementById("result");
+            var backgroundContainer = document.getElementById("background-container");
+
+            var animationQuestions = [...questions];
+
+            if (animationQuestions.length > 0) {
+                if (animationQuestions.length > 5) {
+                    animationQuestions = animationQuestions.sort(() => Math.random() - 0.5).slice(0, 5);
+                }
+
+                var currentIndex = 0;
+
+                var animationInterval = setInterval(function () {
+                    var randomIndex = Math.floor(Math.random() * animationQuestions.length);
+                    var randomQuestion = animationQuestions[randomIndex].question;
+                    var correctAnswer = animationQuestions[randomIndex].answer;
+                    var choices = shuffleChoices(correctAnswer);
+
+                    questionContainer.style.opacity = 0;
+
+                    setTimeout(function () {
+                        document.getElementById("question-text").textContent = randomQuestion;
+                        resultDiv.innerHTML = "";
+                        questionContainer.style.opacity = 1;
+
+                        setTimeout(function () {
+                            for (var i = 0; i < choices.length; i++) {
+                                var choiceElement = document.getElementById("choice" + (i + 1));
+                                choiceElement.nextSibling.textContent = choices[i];
+                            }
+
+                            showCorrectAnswer(correctAnswer, choices);
+
+                        }, 100);
+
+                    }, 100);
+
+                    currentIndex++;
+
+                    if (currentIndex === animationQuestions.length) {
+                        clearInterval(animationInterval);
+
+                        if (questions.length === 0) {
+                            showCongratsMessage();
+                        } else {
+                            showFinalQuestion();
+                        }
+                    }
+                }, 200);
+            } else {
+                showCongratsMessage();
+            }
+        }
+
+        function checkAnswer() {
+            var selectedChoice = document.querySelector('input[name="answer"]:checked');
+            var resultDiv = document.getElementById("result");
+
+            if (selectedChoice) {
+                var isCorrect = selectedChoice.dataset.correct === "true";
+
+                totalAttempts++;
+                if (isCorrect) {
+                    correctAttempts++;
+
+                    var currentQuestion = getCurrentQuestion();
+                    var indexToRemove = questions.indexOf(currentQuestion);
+                    if (indexToRemove !== -1) {
+                        questions.splice(indexToRemove, 1);
+                    }
+                }
+
+                var checkedLabel = document.querySelector('#answer-form label[for="' + selectedChoice.id + '"]');
+                if (checkedLabel) {
+                    checkedLabel.style.color = isCorrect ? '#34a853' : '#ee1905';
+                }
+                if (!isCorrect) {
+                    var correctAnswerLabel = document.querySelector('#answer-form label[for="choice' + getCorrectChoiceIndex() + '"]');
+                    if (correctAnswerLabel) {
+                        correctAnswerLabel.style.color = '#34a853';
+                        correctAnswerLabel.style.fontWeight = 'bold';
+                        correctAnswerLabel.style.fontSize = '20px';
+                        correctAnswerLabel.style.borderBottom = '2px solid #34a853';
+                    }
+                }
+                updateScoreDisplay();
+
+                var delay = isCorrect ? 1000 : 2000;
+                setTimeout(function () {
+                    resetLabelStyles();
+                    displayNextQuestion();
+                }, delay);
+
+                selectedChoice.checked = false;
+            } else {
+            }
+        }
+        function showCongratsMessage() {
+            var questionContainer = document.getElementById("question-container");
+            questionContainer.innerHTML = '<p id="question-text">CONGRATS!</p>';
+
+            var answerForm = document.getElementById("answer-form");
+            answerForm.innerHTML = '';
+
+            var checkAnswerButton = document.getElementById("check-answer");
+            checkAnswerButton.style.display = 'none';
+
+            var resetButton = document.getElementById("reset-quiz");
+            resetButton.style.display = 'block';
+        }
+
+        function resetQuiz() {
+            questions = [];
+
+            saveQuestionsToStorage();
+
+            totalAttempts = 0;
+            correctAttempts = 0;
+            location.reload();
+        }
+
+        function resetLabelStyles() {
+            var labels = document.querySelectorAll('#answer-form label');
+            labels.forEach(label => {
+                label.style.color = '';
+                label.style.fontWeight = 'normal';
+                label.style.borderBottom = 'none';
+                label.style.fontSize = '';
+            });
+        }
+
+        function showCorrectAnswer(correctAnswer, choices) {
+            var labels = document.querySelectorAll('#answer-form label');
+
+            for (var i = 0; i < choices.length; i++) {
+                var choiceElement = document.getElementById("choice" + (i + 1));
+                var label = choiceElement.parentElement;
+
+                if (choices[i] === correctAnswer) {
+                    choiceElement.dataset.correct = "true";
+                } else {
+                    choiceElement.dataset.correct = "false";
+                }
+            }
+        }
+
+        function getCorrectChoiceIndex() {
+            var choices = document.querySelectorAll('input[name="answer"]');
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].dataset.correct === "true") {
+                    return i + 1;
+                }
+            }
+            return -1;
+        }
+
+
+        function resetLabelColors() {
+            var labels = document.querySelectorAll('#answer-form label');
+            labels.forEach(label => {
+                label.style.color = '';
+            });
+        }
+
+        function showCorrectAnswer(correctAnswer, choices) {
+            var labels = document.querySelectorAll('#answer-form label');
+
+            for (var i = 0; i < choices.length; i++) {
+                var choiceElement = document.getElementById("choice" + (i + 1));
+                var label = choiceElement.parentElement;
+
+                if (choices[i] === correctAnswer) {
+                    choiceElement.dataset.correct = "true";
+                } else {
+                    choiceElement.dataset.correct = "false";
+                }
+            }
+        }
+
+        function getCorrectChoiceIndex() {
+            var choices = document.querySelectorAll('input[name="answer"]');
+            for (var i = 0; i < choices.length; i++) {
+                if (choices[i].dataset.correct === "true") {
+                    return i + 1;
+                }
+            }
+            return -1;
+        }
+
+        function shuffleChoices(correctAnswer) {
+            var incorrectAnswers = generateIncorrectAnswers(correctAnswer);
+            var choices = [correctAnswer, ...incorrectAnswers];
+
+            for (var i = choices.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                [choices[i], choices[j]] = [choices[j], choices[i]];
+            }
+
+            return choices;
+        }
+
+
+
+        function generateIncorrectAnswers(correctAnswer) {
+            var incorrectAnswers = [];
+
+            while (incorrectAnswers.length < 2 && asteriskLines.length > 0) {
+                var randomAsterisk = asteriskLines[Math.floor(Math.random() * asteriskLines.length)];
+                if (!incorrectAnswers.includes(randomAsterisk) && randomAsterisk !== correctAnswer) {
+                    incorrectAnswers.push(randomAsterisk);
+                }
+            }
+
+            return incorrectAnswers;
+        }
+
+        var totalAttempts = 0;
+        var correctAttempts = 0;
+        var wrongAttempts = 0;
+        var score = '0/0';
+
+
+
+        function getCurrentQuestion() {
+            var questionText = document.getElementById("question-text").textContent;
+            return questions.find(q => q.question.trim() === questionText.trim());
+        }
+
+
+
+
+        function updateScoreDisplay() {
+            var scoreDisplay = document.getElementById("score-display");
+            scoreDisplay.textContent = 'SCORE: ' + correctAttempts + '/' + totalAttempts;
+        }
+
+
+
+        function addCustomQuestion() {
+            var customQuestionInput = document.getElementById("custom-question");
+            var customAnswerInput = document.getElementById("custom-answer");
+
+            var customQuestion = customQuestionInput.value.trim();
+            var customAnswer = customAnswerInput.value.trim();
+
+            if (customQuestion !== "" && customAnswer !== "") {
+                questions.push({ question: customQuestion, answer: customAnswer });
+
+                customQuestionInput.value = "";
+                customAnswerInput.value = "";
+
+                alert("Custom question added successfully!");
+            } else {
+                alert("Please enter both a question and an answer.");
+            }
+        }
+
+        function toggleCustomForm() {
+            var customForm = document.getElementById("custom-question-form");
+            customForm.hidden = !customForm.hidden;
+        }
+
+        function addCustomQuestion() {
+            var customQuestionInput = document.getElementById("custom-question");
+            var customAnswerInput = document.getElementById("custom-answer");
+            var customMessageDiv = document.getElementById("custom-question-message");
+
+            var customQuestion = customQuestionInput.value.trim();
+            var customAnswer = customAnswerInput.value.trim();
+
+            if (customQuestion !== "" && customAnswer !== "") {
+                questions.push({ question: customQuestion, answer: customAnswer });
+
+                customQuestionInput.value = "";
+                customAnswerInput.value = "";
+
+                customMessageDiv.innerHTML = "added successfully!";
+            } else {
+                customMessageDiv.innerHTML = "Please enter both a question and an answer.";
+            }
+        }
+        function deleteAllQuestions() {
+            var confirmDelete = confirm("Are you sure you want to delete all questions?");
+            if (confirmDelete) {
+                questions = [];
+                alert("All questions deleted successfully!");
+            }
+        }
+        /*localStorage.removeItem('customQuestions'); IMPORTANT!! REFRESH SA COOKIES*/
+        var storedQuestions = localStorage.getItem('customQuestions');
+        var questions = storedQuestions ? JSON.parse(storedQuestions) : [
+
+        ];
+
+
+
+        function saveQuestionsToStorage() {
+            localStorage.setItem('customQuestions', JSON.stringify(questions));
+        }
+
+        function addCustomQuestion() {
+            var customQuestionInput = document.getElementById("custom-question");
+            var customAnswerInput = document.getElementById("custom-answer");
+            var customMessageDiv = document.getElementById("custom-question-message");
+
+            var customQuestion = customQuestionInput.value.trim();
+            var customAnswer = customAnswerInput.value.trim();
+
+            if (customQuestion !== "" && customAnswer !== "") {
+                questions.push({ question: customQuestion, answer: customAnswer });
+
+                saveQuestionsToStorage();
+
+                customQuestionInput.value = "";
+                customAnswerInput.value = "";
+
+                customMessageDiv.innerHTML = "Added successfully!";
+            } else {
+                customMessageDiv.innerHTML = "Please enter both a question and an answer.";
+            }
+        }
+
+        function deleteAllQuestions() {
+            var confirmDelete = confirm("Are you sure you want to delete all questions?");
+            if (confirmDelete) {
+                questions = [];
+                saveQuestionsToStorage();
+                alert("All questions deleted successfully!");
+            }
+        }
+        function openFileExplorer() {
+            var uploadInput = document.getElementById("uploadDocument");
+            uploadInput.click();
+        }
+
+        function analyzeDocument() {
+            var uploadInput = document.getElementById("uploadDocument");
+
+            if (uploadInput.files.length > 0) {
+                var file = uploadInput.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var documentContent = e.target.result;
+                    collectAsteriskLines(documentContent);
+
+                    parseDocumentContent(documentContent);
+                };
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert("Please select a Word document.");
+            }
+        }
+
+
+
+        function parseDocumentContent(content) {
+            mammoth.extractRawText({ arrayBuffer: content })
+                .then(function (result) {
+                    var lines = result.value.split('\n');
+                    var currentAnswer = null;
+
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i].trim();
+
+                        if (line.startsWith('*')) {
+                            currentAnswer = line.substring(1).trim();
+                        } else if (line !== "") {
+                            var question = line.trim();
+
+                            if (currentAnswer !== null) {
+                                questions.push({ question: question, answer: currentAnswer });
+                                currentAnswer = null;
+                                console.log("Added:", { question, answer: currentAnswer });
+                            } else {
+                                console.log("Answer not found for question on line " + (i + 1) + ": " + question);
+                            }
+                        }
+                    }
+
+                    saveQuestionsToStorage();
+                    alert("Imported to box!");
+                    animateQuestions();
+                })
+                .catch(function (err) {
+                    console.error("Error analyzing document:", err);
+                    alert("Error analyzing document. Please try again.");
+                });
+        }
+        var asteriskLines = [];
+
+        function collectAsteriskLines(content) {
+            mammoth.extractRawText({ arrayBuffer: content })
+                .then(function (result) {
+                    var lines = result.value.split('\n');
+
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i].trim();
+                        if (line.startsWith('*')) {
+                            asteriskLines.push(line.substring(1).trim());
+                        }
+                    }
+
+                    console.log("Asterisk Lines:", asteriskLines);
+
+                })
+                .catch(function (err) {
+                    console.error("Error collecting asterisk lines:", err);
+                    alert("Error collecting asterisk lines. Please try again.");
+                });
+        }
+
+        function analyzeDocumentSequential() {
+            var uploadInput = document.getElementById("uploadDocument");
+
+            if (uploadInput.files.length > 0) {
+                var file = uploadInput.files[0];
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    var documentContent = e.target.result;
+                    collectAsteriskLines(documentContent);
+
+                    questions = [];
+                    asteriskLines = [];
+                    saveQuestionsToStorage(); // Update local storage after resetting
+
+                    parseDocumentContentSequential(documentContent);
+                };
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert("Please select a Word document.");
+            }
+        }
+
+        function parseDocumentContentSequential(content) {
+            mammoth.extractRawText({ arrayBuffer: content })
+                .then(function (result) {
+                    var lines = result.value.split('\n');
+                    var currentAnswer = null;
+
+                    for (var i = 0; i < lines.length; i++) {
+                        var line = lines[i].trim();
+
+                        if (line.startsWith('*')) {
+                            currentAnswer = line.substring(1).trim();
+                        } else if (line !== "") {
+                            var question = line.trim();
+
+                            if (currentAnswer !== null) {
+                                questions.push({ question: question, answer: currentAnswer });
+                                currentAnswer = null;
+                                console.log("Added:", { question, answer: currentAnswer });
+                            } else {
+                                console.log("Answer not found for question on line " + (i + 1) + ": " + question);
+                            }
+                        }
+                    }
+
+                    saveQuestionsToStorage();
+                    alert("Imported to box!");
+                    displayQuestionsSequentially();
+                })
+                .catch(function (err) {
+                    console.error("Error analyzing document:", err);
+                    alert("Error analyzing document. Please try again.\nDetails: " + err.message);
+                });
+        }
+        function displayQuestionsSequentially() {
+            if (questions.length > 0) {
+                var questionContainer = document.getElementById("question-container");
+                var resultDiv = document.getElementById("result");
+
+                var currentQuestion = questions[0];
+                var questionText = currentQuestion.question;
+                var correctAnswer = currentQuestion.answer;
+                var choices = shuffleChoices(correctAnswer);
+
+                questionContainer.style.opacity = 0;
+
+                setTimeout(function () {
+                    document.getElementById("question-text").textContent = questionText;
+                    resultDiv.innerHTML = "";
+                    questionContainer.style.opacity = 1;
+
+                    setTimeout(function () {
+                        for (var i = 0; i < choices.length; i++) {
+                            var choiceElement = document.getElementById("choice" + (i + 1));
+                            choiceElement.nextSibling.textContent = choices[i];
+                        }
+
+                        showCorrectAnswer(correctAnswer, choices);
+                    }, 100);
+                }, 100);
+            } else {
+                showCongratsMessage();
+            }
+        }
+        function displayNextQuestion() {
+            var questionContainer = document.getElementById("question-container");
+            var resultDiv = document.getElementById("result");
+
+            if (questions.length > 0) {
+                var currentQuestion = questions[0];
+                var questionText = currentQuestion.question;
+                var correctAnswer = currentQuestion.answer;
+                var choices = shuffleChoices(correctAnswer);
+
+                questionContainer.style.opacity = 0;
+
+                setTimeout(function () {
+                    document.getElementById("question-text").textContent = questionText;
+                    resultDiv.innerHTML = "";
+                    questionContainer.style.opacity = 1;
+
+                    setTimeout(function () {
+                        for (var i = 0; i < choices.length; i++) {
+                            var choiceElement = document.getElementById("choice" + (i + 1));
+                            choiceElement.nextSibling.textContent = choices[i];
+                        }
+
+                        showCorrectAnswer(correctAnswer, choices);
+                    }, 100);
+
+                }, 100);
+
+                questions.shift();
+            } else {
+                showCongratsMessage();
+            }
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+
+</html>
